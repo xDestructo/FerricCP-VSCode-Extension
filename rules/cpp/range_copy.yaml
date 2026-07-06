@@ -1,0 +1,13 @@
+id: range_copy
+language: cpp
+rule_type: syntactic
+severity: warning
+message: "Range based loop is making expensive deep copies of elements."
+tip: "Use 'const auto&' or 'auto&' to pass by reference and skip the copy."
+query: |
+  (for_range_loop
+    (declaration
+      type: (placeholder_type_specifier)
+      declarator: (identifier) @violation
+    )
+  )
