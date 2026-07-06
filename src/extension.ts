@@ -8,10 +8,11 @@ export function activate(context: ExtensionContext) {
     const serverPath = context.asAbsolutePath(
         path.join('bin', process.platform === 'win32' ? 'ferric_cp.exe' : 'ferric_cp')
     );
+    const rulesPath = context.asAbsolutePath('rules'); 
 
     const serverOptions: ServerOptions = {
-        run: { command: serverPath, args: ['lsp']},
-        debug: { command: serverPath, args: ['lsp']}
+        run: { command: serverPath, args: ['lsp', '--rules', rulesPath] },
+        debug: { command: serverPath, args: ['lsp', '--rules', rulesPath] }
     };
 
     const clientOptions: LanguageClientOptions = {
